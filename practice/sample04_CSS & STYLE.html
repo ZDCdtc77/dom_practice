@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sample04_CSS & STYLE</title>
+</head>
+<body>
+    <p id="p1" class="pcls" style="color: red;font-size: 12px">看console</p>
+
+    <script>
+        window.onload=function(){
+            /*获取css*/
+            console.log("获取css")
+            console.log(document.querySelector('#p1').style.color)
+            console.log(document.querySelector('#p1').ownerDocument.defaultView.getComputedStyle(document.querySelector('#p1'), null).color)
+            console.log($('#p1').css("color"))
+
+            console.log(document.querySelector('#p1').style.fontSize)
+            console.log($('#p1').css("font-size"))
+
+            /*设置css*/
+            $("#p1").css("font-size","20px")
+            $("#p1").css({"background":"blue",fontSize:"40px"})
+
+            document.querySelector('#p1').style.color="#000";
+
+            /*设置class*/
+            $('#p1').addClass("p1");
+            document.querySelector('#p1').classList.add("p2");//IE11
+            var clsarr=document.getElementById("p1").className.split(/\s/)
+            if(clsarr.indexOf('p2')!=-1){
+                console.log("已经有P2 class")
+
+                clsarr.push("p3")
+                document.getElementById("p1").className = clsarr.join(" ")
+            }
+
+            /*删除class*/
+            $('#p1').removeClass("p1");
+            document.querySelector('#p1').classList.remove("p3");//IE11
+            var clsarr=document.getElementById("p1").className.split(/\s/)
+            if(clsarr.indexOf('p2')!=-1){
+                console.log("已经有P2 class,现在要删掉了")
+
+                var newCls=[];
+                for(var i=0;i<clsarr.length;i++){
+                    if(clsarr[i]==='p2'){
+                        clsarr.splice(i,1);
+                        break;
+                    }
+                }
+
+                document.getElementById("p1").className = clsarr.join(" ")
+            }
+
+            /*是否拥有class*/
+            console.log($('#p1').hasClass('pcls'))
+            console.log(document.getElementById("p1").className.indexOf('pcls')!=-1)
+            console.log(document.querySelector('#p1').classList.contains('pcls'))
+
+            /*toggle class 一般用不到，懒得写了*/
+
+        }
+
+    </script>
+    <script src="../release/dom-core.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sample03-属性</title>
+</head>
+<body>
+    <p id="p1" class="pcls">看console</p>
+
+    <script>
+        window.onload=function(){
+            /*选择器 by tag*/
+            console.log("获取属性")
+            console.log(document.querySelector('#p1').getAttribute("class"))
+            console.log($('#p1').attr("class"))
+
+            console.log("设置属性")
+            console.log(document.querySelector('#p1').setAttribute("foo2","bar2"))
+            console.log($('#p1').attr("foo","bar"))
+        }
+
+    </script>
+    <script src="../release/dom-core.js"></script>
+</body>
+</html>

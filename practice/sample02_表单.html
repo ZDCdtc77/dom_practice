@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sample02-表单</title>
+</head>
+<body>
+    <p id="p1">看console</p>
+    <form action="">
+        <input type="text" id="my-input" value="myinput">
+        <input type="checkbox" id="my-input-checkbox" checked="checked" value="1" onchange="alert(this.value)">
+        <input type="checkbox" id="my-input-checkbox2" value="2">
+        <input type="checkbox" id="my-input-checkbox3" >
+    </form>
+    <script>
+        window.onload=function(){
+            console.log("获取表单值")
+            // dom-core
+            console.log($('#my-input').val())
+            // Native
+            console.log(document.querySelector('#my-input').value)
+
+            console.log($('#my-input-checkbox').val())
+            console.log(document.querySelector('#my-input-checkbox').value)
+
+            console.log($('#my-input-checkbox2').val())
+            console.log(document.querySelector('#my-input-checkbox2').value)
+
+            //document.querySelector('#my-input-checkbox3').checked=false;
+            console.log($('#my-input-checkbox3').val())
+            console.log(document.querySelector('#my-input-checkbox3').value)
+
+        }
+
+    </script>
+    <script src="../release/dom-core.js"></script>
+</body>
+</html>

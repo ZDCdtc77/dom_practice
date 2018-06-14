@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sample01-选择器</title>
+</head>
+<body>
+    <p id="p1">看console</p>
+    <p class="p2">P2</p>
+    <a href="baidu.com">baidu</a>
+    <div id="aUlParentParent">
+        <div id="aUlParent">
+            <ul id="aUl">
+                <li></li>
+                <li id="aLiBefore"></li>
+                <li id="aLi"></li>
+                <li id="aLiNext"></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        window.onload=function(){
+            /*选择器 by tag*/
+            console.log("选择器 by tag")
+            console.log(document.querySelectorAll('p'))
+            console.log($('p'))
+
+            /*选择器 by class*/
+            console.log("选择器 by class")
+            console.log(document.getElementsByClassName('p2'))
+            console.log(document.querySelectorAll('.p2'))
+            console.log($('.p2'))
+
+            /*选择器 by id*/
+            console.log("选择器 by id")
+            console.log(document.getElementById('p1'))
+            console.log(document.querySelector('#p1'))
+            console.log($('#p1'))
+
+            /*选择器 by attr*/
+            console.log("选择器 by attr")
+            console.log(document.querySelectorAll("a[href='baidu.com']"))
+            console.log($("a[href='baidu.com']"))
+
+            /*选择器 by 兄弟*/
+            console.log("选择器 by 兄弟")
+            var aLi=document.querySelector("#aLi")
+            var childrenList=aLi.parentNode.children;
+            console.log(
+                Array.prototype.filter.call(childrenList, function(child){
+                        return child !== aLi
+                })
+            )
+            console.log($("#aLi").siblings("li"))
+
+            /*选择器 by 上一个元素*/
+            console.log("选择器 by 上一个元素")
+            console.log(document.querySelector("#aLi").previousElementSibling)
+            console.log($("#aLi").prev())
+
+            /*选择器 by 下一个元素*/
+            console.log("选择器 by 下一个元素")
+            console.log(document.querySelector("#aLi").nextElementSibling)
+            console.log($("#aLi").next())
+
+            /*选择器 by 最近祖先元素*/
+            console.log("选择器 by 最近祖先元素")
+            console.log($("#aLi").closest('#aUlParent'))
+            // Native - Only latest, NO IE
+            console.log(document.querySelector("#aLi").closest('#aUlParent'));
+
+            /*选择器 by ParentUntil*/
+            console.log("选择器 by ParentUntil")
+            console.log($("#aLi").parentUntil('div#aUlParentParent'))
+        }
+
+    </script>
+    <script src="../release/dom-core.js"></script>
+</body>
+</html>
