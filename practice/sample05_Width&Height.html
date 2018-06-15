@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sample05_Width&Height</title>
+</head>
+<body style="height: 2000px;width: 2000px">
+    <p id="p1" class="pcls" style="color: red;font-size: 12px">看console</p>
+    <div style="background: red;height: 200px;box-sizing: content-box;border: 5px solid black;padding: 5px" id="contentBox">contentBox</div>
+    <div style="background: red;height: 200px;box-sizing: border-box;border: 5px solid black;padding: 5px" id="borderBox">borderBox</div>
+    <script>
+        window.onload=function(){
+            /*Window height*/
+            console.log("Window height")
+            /*$(window).height()*/
+            console.log(document.documentElement.clientHeight) //减去了横向滚动条的高度
+            console.log(window.innerHeight)//包含横向滚动条的高度 与JQUERY相同
+            console.log(document.body.clientHeight)//body高度
+
+            /*Document height*/
+            console.log("Document height")
+            /*$(document).height()*/
+            const body = document.body;
+            const html = document.documentElement
+            const height = Math.max(
+                body.offsetHeight,
+                body.scrollHeight,
+                html.clientHeight,
+                html.offsetHeight,
+                html.scrollHeight
+            )
+
+            /*Element height*/
+            console.log("Element height")
+            /*$el.height();*/
+            function getHeight(el) {
+                const styles= this.getComputedStyle(el);
+                const height = el.offsetHeight;
+                const borderTopWidth = parseFloat(styles.borderTopWidth);
+                const borderBottomWidth = parseFloat(styles.borderBottomWidth);
+                const paddingTop = parseFloat(styles.paddingTop);
+                const paddingBottom = parseFloat(styles.paddingBottom);
+                return height - borderBottomWidth - borderTopWidth - paddingTop - paddingBottom;
+            }
+            console.log(getHeight(document.getElementById('contentBox')))//计算的是内容高度
+            console.log(getHeight(document.getElementById('borderBox')))  //计算的是内容高度
+
+            // 精确到整数（border-box 时为 height - border 值，content-box 时为 height + padding 值）
+            console.log(document.getElementById('contentBox').clientHeight)
+            console.log(document.getElementById('borderBox').clientHeight)//包含padding的高度
+
+            // 精确到小数（border-box 时为 height 值，content-box 时为 height + padding + border 值）
+            console.log(document.getElementById('contentBox').getBoundingClientRect().height)
+            console.log(document.getElementById('borderBox').getBoundingClientRect().height)//包含padding的高度
+
+            /*Position & Offset*/
+            console.log("Position & Offset")
+
+            /*获得匹配元素相对父元素的偏移
+            // jQuery
+            $el.position();*/
+            // Native
+            const el=document.getElementById('contentBox')
+            console.log({ left: el.offsetLeft, top: el.offsetTop })
+
+            /* Offset
+
+            获得匹配元素相对文档的偏移
+
+            // jQuery
+            $el.offset();*/
+
+            // Native
+            function getOffset (el) {
+                const box = el.getBoundingClientRect();
+
+                return {
+                    top: box.top + window.pageYOffset - document.documentElement.clientTop,
+                    left: box.left + window.pageXOffset - document.documentElement.clientLeft
+                }
+            }
+            console.log(getOffset(el))
+
+            /*Scroll Top
+
+            获取元素滚动条垂直位置。
+
+            // jQuery
+            $(window).scrollTop();*/
+
+            // Native
+            console.log((document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop);
+        }
+
+    </script>
+    <script src="../release/dom-core.js"></script>
+</body>
+</html>
