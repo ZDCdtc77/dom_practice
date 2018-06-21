@@ -32,7 +32,18 @@
             console.log($("#p2").html('<h3>中午好困</h3>'));
             console.log(document.querySelector('#p3').innerHTML='<h2>中午贼困</h2>')
 
+            //Append 插入到子节点的末尾
+            //dom-core实现的append不接受字符串 需要先转换
+            $("#p1").append($("<span>我是dom-core append进来的\t</span>"))
+            var span=document.createElement('span')
+            span.innerHTML='我是原生append进来的\t'
+            document.querySelector('#p1').appendChild(span)
 
+            //Prepend
+            $("#p1").prepend($("<span>我是dom-core prepend进来的\t</span>"))
+            var span=document.createElement('span')
+            span.innerHTML='我是原生prepend进来的\t'
+            document.querySelector('#p1').insertBefore(span,document.querySelector('#p1').firstChild)
         }
 
     </script>
