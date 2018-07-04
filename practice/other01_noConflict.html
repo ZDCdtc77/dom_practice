@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sample06_dom操作</title>
+</head>
+<body style="height: 2000px;width: 2000px">
+    <p id="p1" class="pcls" style="color: red;font-size: 12px">看console<span>hehe*.?</span></p>
+    <p id="p2" class="pcls" style="color: red;font-size: 12px">看console<span>hehe*.?</span></p>
+    <p id="p3" class="pcls" style="color: red;font-size: 12px">看console<span>hehe*.?</span></p>
+    <div style="background: red;height: 200px;box-sizing: content-box;border: 5px solid black;padding: 5px" id="contentBox">contentBox</div>
+    <div style="background: red;height: 200px;box-sizing: border-box;border: 5px solid black;padding: 5px" id="borderBox">borderBox</div>
+    <script>
+        window.onload=function(){
+            console.log("从 DOM 中移除元素")
+            $("#contentBox").remove();
+            document.getElementById("borderBox").parentNode.removeChild(document.getElementById('borderBox'))
+
+            console.log('返回指定元素及其后代的文本内容')
+            console.log($("#p1").text());
+            console.log(document.getElementById('p1').textContent)//IE11
+
+            console.log('设置元素的文本内容。')
+            $("#p1").text('我是新内容<span>123</span>')
+            document.getElementById('p1').textContent=document.getElementById('p1').textContent+"6666"
+
+            console.log("获取HTML")
+            console.log($("#p1").html())
+            console.log(document.querySelector('#p1').innerHTML)
+
+            console.log("设置HTML")
+            console.log($("#p2").html('<h3>中午好困</h3>'));
+            console.log(document.querySelector('#p3').innerHTML='<h2>中午贼困</h2>')
+
+            //Append 插入到子节点的末尾
+            //dom-core实现的append不接受字符串 需要先转换
+            $("#p1").append($("<span>我是dom-core append进来的\t</span>"))
+            var span=document.createElement('span')
+            span.innerHTML='我是原生append进来的\t'
+            document.querySelector('#p1').appendChild(span)
+
+            //Prepend
+            $("#p1").prepend($("<span>我是dom-core prepend进来的\t</span>"))
+            var span=document.createElement('span')
+            span.innerHTML='我是原生prepend进来的\t'
+            document.querySelector('#p1').insertBefore(span,document.querySelector('#p1').firstChild)
+        }
+
+    </script>
+    <script src="../release/dom-core.js"></script>
+</body>
+</html>
