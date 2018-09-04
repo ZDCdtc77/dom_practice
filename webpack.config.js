@@ -1,6 +1,8 @@
 module.exports = {
+    devtool: '#source-map',
     entry: {
         'dom-core':'./lib/dom-core.js',
+        'index':'./lib/index.js'
     },
     output: {
         path: __dirname,
